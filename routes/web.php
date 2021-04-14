@@ -25,8 +25,9 @@ Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home
 
 Route::resource('adminproduk', 'ProdukController'::class)->middleware('is_admin');
 Route::post('adminproduk/{id}', 'ProdukController@update');
-//Route::get('/adminproduk', '\App\Http\Controllers\ProdukController@edit');
 
+Route::resource('users', UserController::class);
+Route::resource('transaksipage', TransaksiIndexController::class);
 
 Route::get('transaksi/{id}', 'TransaksiController@index');
 Route::get('transaksidetail/{id}', 'TransaksiController@detail');
@@ -44,6 +45,4 @@ Route::get('latar', function () {
     return view('info/latar');
 });
 
-Route::get('produk', function () {
-    return view('info.produk');
-});
+Route::get('/produk', 'ProdukController@index');

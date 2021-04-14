@@ -1,13 +1,12 @@
 @extends('layouts.admin')
 @section('contentAdmin')
-@section('tittle', 'Halaman Data Produk')
+@section('tittle', 'Halaman Data Users')
 <div class="card">
 
     <div class="card-body">
 
         <table id="example1" class="table table-bordered table-striped">
-            <a href="{{ route('adminproduk.create') }}" class="btn btn-primary btn-sm">
-                <i class="fa fa-plus"></i> Tambah Data Produk</a>
+
             <br><br>
             @if (session('pesan'))
             <div class="alert alert-success alert-dismissible">
@@ -19,36 +18,33 @@
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Nama Produk</th>
-                    <th>Stok</th>
-                    <th>Harga</th>
-                    <th>Foto</th>
-                    <th>Keterangan</th>
-
+                    <th>Nama User</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Alamat</th>
+                    <th>Kota</th>
+                    <th>Provinsi</th>
+                    <th>No. Hp</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 <?php $no=1; ?>
-                @forelse($produks as $prd)
+                @forelse($users as $us)
                 <tr>
                     <td>{{ $no++}}</td>
-                    <td>{{ $prd-> nama_produk}}</td>
-                    <td>{{ $prd-> stok}}</td>
-                    <td>{{ $prd-> harga}}</td>
-
-                    <td class="text-center">
-                        <img src="{{ Storage::url('public/uploads/').$prd->gambar }}" class="rounded"
-                            style="width: 150px">
-                    </td>
-                    <td>{{ $prd-> keterangan}}</td>
+                    <td>{{ $us-> name}}</td>
+                    <td>{{ $us-> email}}</td>
+                    <td>{{ $us-> password}}</td>
+                    <td>{{ $us-> alamat}}</td>
+                    <td>{{ $us-> kota}}</td>
+                    <td>{{ $us-> provinsi}}</td>
+                    <td>{{ $us-> nohp}}</td>
 
 
                     <td class="text-center">
                         <form onsubmit="return confirm('Apakah anda yakin ingin menghapus data ini ??');"
-                            action="{{ route('adminproduk.destroy', $prd->id) }}" method="POST">
-                            <a href="{{ route('adminproduk.edit', $prd->id) }}" class="btn btn-sm btn-warning"><i
-                                    class="far fa-edit"></i> Edit</a>
+                            action="{{ route('users.destroy', $us->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i>

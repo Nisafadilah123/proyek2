@@ -29,7 +29,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="../user" class="nav-link">
+                    <a href="{{ route('users.index') }}" class="nav-link">
                         <i class="fa fa-users"></i>
                         <p>User</p>
                     </a>
@@ -47,9 +47,9 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="{{ route('adminproduk.index') }}" class="nav-link">
+                    <a href="{{ route('transaksipage.index') }}" class="nav-link">
                         <i class="fa fa-book"></i>
-                        <p>Data Pesanan</p>
+                        <p>Data Transaksi</p>
                     </a>
                 </li>
 

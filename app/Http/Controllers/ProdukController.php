@@ -20,8 +20,9 @@ class ProdukController extends Controller
      */
     public function index()
     {
-        $produks = Produk::latest()->paginate(10);
-        //dd($produks);
+        $produks = Produk::all();
+
+        //return response()->json($produks);
         return view('adminproduk.index', compact('produks'));
     }
     /**

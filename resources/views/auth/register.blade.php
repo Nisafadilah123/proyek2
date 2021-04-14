@@ -61,6 +61,63 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="alamat" class="col-md-4 col-form-label text-md-right">{{ __('Alamat') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="alamat" type="text" class="form-control @error('alamat') is-invalid @enderror" name="alamat" required autocomplete="alamat" autofocus>
+
+                                @error('alamat')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="kota" class="col-md-4 col-form-label text-md-right">{{ __('Kota') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="kota" type="text" class="form-control @error('kota') is-invalid @enderror" name="kota" required autocomplete="kota" autofocus>
+
+                                @error('kota')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="provinsi" class="col-md-4 col-form-label text-md-right">{{ __('Provinsi') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="provinsi" type="text" class="form-control @error('provinsi') is-invalid @enderror" name="provinsi" required autocomplete="kota" autofocus>
+
+                                @error('provinsi')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="nohp" class="col-md-4 col-form-label text-md-right">{{ __('No Hp') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="nohp" type="text" class="form-control @error('nohp') is-invalid @enderror" name="nohp" required autocomplete="nohp" autofocus>
+
+                                @error('nohp')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
