@@ -22,7 +22,7 @@ class ProfileController extends Controller
         return view('profile.index', compact('user'));
     }
 
-    public function update(Request $request)
+    public function update(Request $request,$id)
     {
         $this->validate($request, [
             'password'  => 'confirmed',

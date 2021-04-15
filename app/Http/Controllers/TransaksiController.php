@@ -9,8 +9,6 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Alert;
 use App\Models\User;
-use Auth;
-
 
 class TransaksiController extends Controller
 {
@@ -38,12 +36,12 @@ class TransaksiController extends Controller
         $tanggal = Carbon::now();
 
         //cek validasi
-        $cek_transaksi = Transaksi::where('user_id', Auth::user()->id)->where('status', 0)->first();
+        $cek_transaksi = Transaksi::where([['user_id', auth()->user()->id],['status', 0]])->first();
         //simpan ke database transaksi
         if (empty($cek_transaksi)) {
             //simpan ke data base transaksi
             $transaksi = new Transaksi;
-            $transaksi->user_id = Auth::user()->id;
+            $transaksi->user_id = auth()->user()->id;
             $transaksi->tanggal = $tanggal;
             $transaksi->status = 0;
             $transaksi->kode = mt_rand(100, 999);
@@ -53,10 +51,14 @@ class TransaksiController extends Controller
 
 
         //simpan ke database transaksi detail\
-        $transaksi_baru = Transaksi::where('user_id', Auth::user()->id)->where('status', 0)->first();
+        $transaksi_baru = Transaksi::where([['user_id', auth()->user()->id],['status', 0]])->first();
 
         //cek transaksi detail
-        $cek_transaksi_detail = TransaksiDetail::where('produk_id', $produk->id)->where('transaksi_id', $transaksi_baru->id)->first();
+        $cek_transaksi_detail = TransaksiDetail::where([
+                                    ['produk_id', $produk->id],
+                                    ['transaksi_id', $transaksi_baru->id]
+                                ])->first();
+
         if (empty($cek_transaksi_detail)) {
 
             $transaksi_detail = new TransaksiDetail;
@@ -76,7 +78,7 @@ class TransaksiController extends Controller
             $transaksi_detail->update();
         }
         //jumlah total
-        $transaksi = Transaksi::where('user_id', Auth::user()->id)->where('status', 0)->first();
+        $transaksi = Transaksi::where([['user_id', auth()->user()->id],['status', 0]])->first();
         $transaksi->jumlah_harga = $transaksi->jumlah_harga + $produk->harga * $request->jumlah_transaksi;
         $transaksi->update();
 
@@ -85,9 +87,10 @@ class TransaksiController extends Controller
         alert()->success('Pesanan Sukses Masuk Keranjang', 'Success');
         return redirect('check-out');
     }
-    public function check_out()
+    public function check_out($user_id)
     {
-        $transaksi = Transaksi::where('user_id', Auth::user()->id)->where('status', 0)->first();
+        $user_id = auth()->user()->id;
+        $transaksi = Transaksi::where([['user_id', $user_id],['status', 0]])->first();
         $transaksi_details = [];
         if (!empty($transaksi)) {
             $transaksi_details = TransaksiDetail::where('transaksi_id', $transaksi->id)->get();
@@ -114,7 +117,7 @@ class TransaksiController extends Controller
 
     public function konfirmasi()
     {
-        $user = User::where('id', Auth::user()->id)->first();
+        $user = User::where('id', auth()->user()->id)->first();
 
         if (empty($user->alamat)) {
             Alert()->error('Identitasi Harap dilengkapi', 'Error');
@@ -126,7 +129,7 @@ class TransaksiController extends Controller
             return redirect('profile');
         }
 
-        $transaksi = Transaksi::where('user_id', Auth::user()->id)->where('status', 0)->first();
+        $transaksi = Transaksi::where([['user_id', auth()->user()->id],['status', 0]])->first();
         $transaksi_id = $transaksi->id;
         $transaksi->status = 1;
         $transaksi->update();

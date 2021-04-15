@@ -51,10 +51,6 @@
             </div>
         </div>
         <div class="d-flex flex-row mb-5">
-
-
-
-
             <div class="card mx-auto" style="width: 10rem; height: 13rem;">
                 <a href="#"><img class="card-img-top" src="{{url('storage/uploads/drink.jpg')}}" alt="Card image cap"
                         class="rounded-lg">
@@ -114,9 +110,8 @@
 
     @foreach($produks as $produk)
     <div class="d-flex flex-row mb-5">
-
         <div class="card ml-2" style="width: 12rem;">
-            <img class="card-img-top" src="{{url('storage/uploads')}}/{{$produk->gambar}}" alt="Card image cap"
+            <img class="card-img-top" src="{{ asset('storage/uploads')}}/{{$produk->gambar}}" alt="Card image cap"
                 class="rounded-lg">
             <div class="card-body">
                 <h5 class="card-title">{{$produk->nama_produk}}</h5>
@@ -124,7 +119,6 @@
                     <strong>Harga :</strong> Rp. {{ number_format($produk->harga)}}<br>
                     <strong>Stok :</strong>{{ $produk->stok}}<br>
                     <hr>
-
                 </p>
                 <div class="d-flex flex-row bd-highlight">
                     <a href="{{url('transaksi')}}/{{$produk->id}}" class="btn btn-success mr-2 "><i
